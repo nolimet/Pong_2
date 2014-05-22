@@ -3,13 +3,54 @@ using System.Collections;
 
 public class ballscript : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    bool gameStarted = false;
+    enum direction
+    {
+        left,
+        right
+    }
+    direction direct;
+
+    void Update()
+    {
+        Debug.Log(Input.GetAxis("PlayBall"));
+        if (rigidbody2D.velocity.x < 0)
+        {
+            direct = direction.left;
+        }
+        if (rigidbody2D.velocity.x > 0)
+        {
+            direct = direction.right;
+        }
+        if (!gameStarted && Input.GetAxis("PlayBall") > 0.1f)
+        {
+            float ran = Random.Range(0, 2);
+            if (ran > 1f)
+                transform.rotation = Quaternion.Euler(0, 0, 180);
+            else
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            gameStarted = true;
+            rigidbody2D.velocity = GlobalBallSpeed.GetBallSpeed(transform.rotation.eulerAngles.z);
+        }
+        else if(gameStarted)
+        {
+            if (transform.position.x > 15f || transform.position.x < -15f)
+            {
+                restartGame();
+            }
+        }
+    }
+
+    void restartGame()
+    {
+        GlobalBallSpeed.ballSpeed = 8f;
+        transform.position = Vector3.zero;
+        gameStarted = false;
+        rigidbody2D.velocity = Vector2.zero;
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        particleSystem.Emit(250);
+    }
 }
