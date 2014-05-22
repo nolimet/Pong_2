@@ -13,7 +13,7 @@ public class ballscript : MonoBehaviour {
 
     void Update()
     {
-        Debug.Log(Input.GetAxis("PlayBall"));
+        //Debug.Log(Input.GetAxis("PlayBall"));
         if (rigidbody2D.velocity.x < 0)
         {
             direct = direction.left;
@@ -34,8 +34,14 @@ public class ballscript : MonoBehaviour {
         }
         else if(gameStarted)
         {
-            if (transform.position.x > 15f || transform.position.x < -15f)
+            if (transform.position.x > 15f)
             {
+                GlobalBallSpeed.score.x++;
+                restartGame();
+            }
+            else if (transform.position.x < -15f)
+            {
+                GlobalBallSpeed.score.y++;
                 restartGame();
             }
         }

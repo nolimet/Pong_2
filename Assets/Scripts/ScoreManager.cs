@@ -3,13 +3,12 @@ using System.Collections;
 
 public class ScoreManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
+
+    public TextMesh player1Score;
+    public TextMesh player2Score;
 	// Update is called once per frame
 	void Update () {
-	
+        player1Score.text = ""+GlobalBallSpeed.score.x;
+        player2Score.text = "" + GlobalBallSpeed.score.y;
 	}
 }
