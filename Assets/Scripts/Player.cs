@@ -19,10 +19,14 @@ public class Player : MonoBehaviour {
             {
                 case player.player1:
                    rigidbody.AddForce(new Vector3(0, Input.GetAxis("Player1")*10,0));
+                   if (Input.GetAxis("Player1") == 0)
+                       rigidbody.velocity = Vector3.zero;
                     break;
 
                 case player.player2:
                     rigidbody.AddForce(new Vector3(0, Input.GetAxis("Player2")*10, 0));
+                    if (Input.GetAxis("Player2") == 0)
+                        rigidbody.velocity = Vector3.zero;
                     break;
 
                 case player.AI:
