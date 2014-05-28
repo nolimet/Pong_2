@@ -20,15 +20,16 @@ public class Segment : MonoBehaviour {
             
             if (side == LeftOrRight.left)
                 col.collider.gameObject.particleSystem.startColor = Color.red;
-            col.collider.transform.rotation = Quaternion.Euler(0, 0, -180f / 8f * segmentNum * (int)side);
+           // col.collider.transform.rotation = Quaternion.Euler(0, 0, -180f / 8f * segmentNum * (int)side);
             if (side == LeftOrRight.right)
                 col.collider.gameObject.particleSystem.startColor = Color.magenta;
-            col.collider.transform.rotation = Quaternion.Euler(0, 0, 180f / 8f * segmentNum * (int)side);
+            col.collider.transform.rotation = Quaternion.Euler(0, 0, 20f + (140f / 8f * segmentNum) * (int)side);
+            Debug.Log(20f + 140f / 8f * segmentNum * (int)side);
 
             //col.collider.gameObject.particleSystem.Emit(250);
             if (GlobalBallSpeed.ballSpeed < 30f)
                 GlobalBallSpeed.ballSpeed += 0.5f; ;
-            col.collider.gameObject.rigidbody2D.velocity = GlobalBallSpeed.GetBallSpeed(col.collider.transform.rotation.eulerAngles.z);
+            col.collider.gameObject.rigidbody2D.velocity = GlobalBallSpeed.GetBallSpeed(20f + (140f / 8f * segmentNum) * (int)side);
         }
     }
 }
